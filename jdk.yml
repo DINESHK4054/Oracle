@@ -1,0 +1,14 @@
+- name: Update all Ubuntu packages
+  apt:
+    upgrade: "dist"
+  when: ansible_distribution == 'Ubuntu'
+
+- name: Install required Ubuntu packages
+  apt:
+    update_cache: yes
+    cache_valid_time: 3600
+    name: "{{ packages }}"
+    state: present
+  vars:
+    packages:
+      - openjdk-8-jdk
